@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "6383ad03a110d431f5b1e356",
+    "name": "Los Angeles Intl",
+    "city": "Los Angeles",
+    "country": "United States",
+    "IATA": "LAX",
+    "ICAO": "KLAX",
+    "DST": "A",
+    "altitude": 126,
+    "TZ": "America/Los_Angeles",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.40807,
+        33.942535
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:31:31.393Z"
+  },
+  {
+    "_id": "6383ad04176bb14b83f32d02",
+    "name": "Jack Northrop Fld Hawthorne Muni",
+    "city": "Hawthorne",
+    "country": "United States",
+    "IATA": "HHR",
+    "ICAO": "KHHR",
+    "DST": "A",
+    "altitude": 66,
+    "TZ": "America/Los_Angeles",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.33518,
+        33.92284
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:31:32.375Z"
+  },
+  {
+    "_id": "6383ad5d4492709559a087f7",
+    "name": "Santa Monica Municipal Airport",
+    "city": "Santa Monica",
+    "country": "United States",
+    "IATA": "SMO",
+    "ICAO": "KSMO",
+    "DST": "A",
+    "altitude": 177,
+    "TZ": "America/Los_Angeles",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.45131,
+        34.015835
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:33:01.366Z"
+  },
+  {
+    "_id": "6383ad504492709559a080f1",
+    "name": "Zamperini Field Airport",
+    "city": "Torrance",
+    "country": "United States",
+    "IATA": "TOA",
+    "ICAO": "KTOA",
+    "DST": "A",
+    "altitude": 101,
+    "TZ": "America/Los_Angeles",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.33961,
+        33.80339
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:32:48.506Z"
+  }
+]

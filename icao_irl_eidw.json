@@ -1,0 +1,103 @@
+[
+  {
+    "_id": "6383aca01fb1de2a840ab162",
+    "name": "Dublin",
+    "city": "Dublin",
+    "country": "Ireland",
+    "IATA": "DUB",
+    "ICAO": "EIDW",
+    "DST": "E",
+    "altitude": 242,
+    "TZ": "Europe/Dublin",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -6.270075,
+        53.421333
+      ]
+    },
+    "continent": 5,
+    "createdAt": "2022-11-27T18:29:52.553Z"
+  },
+  {
+    "_id": "6383ad334492709559a07318",
+    "name": "Weston Airport",
+    "city": "Leixlip",
+    "country": "Ireland",
+    "IATA": "",
+    "ICAO": "EIWT",
+    "DST": "E",
+    "altitude": 150,
+    "TZ": "Europe/Dublin",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -6.4875,
+        53.351334
+      ]
+    },
+    "continent": 5,
+    "createdAt": "2022-11-27T18:32:19.556Z"
+  },
+  {
+    "_id": "6383aca06ba30f90d34258ba",
+    "name": "Casement",
+    "city": "Casement",
+    "country": "Ireland",
+    "IATA": "",
+    "ICAO": "EIME",
+    "DST": "E",
+    "altitude": 319,
+    "TZ": "Europe/Dublin",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -6.451333,
+        53.301666
+      ]
+    },
+    "continent": 5,
+    "createdAt": "2022-11-27T18:29:52.635Z"
+  },
+
+  {
+    "_id": "6383ad894492709559a09e6d",
+    "name": "Coonagh",
+    "city": "Limerick",
+    "country": "Ireland",
+    "IATA": "ORK",
+    "ICAO": "EICN",
+    "DST": "E",
+    "altitude": 1,
+    "TZ": "Europe/Dublin",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -8.682096,
+        52.666504
+      ]
+    },
+    "continent": 5,
+    "createdAt": "2022-11-27T18:33:45.258Z"
+  },
+  {
+    "_id": "6383aca0dc6f429e3bd94699",
+    "name": "Shannon",
+    "city": "Shannon",
+    "country": "Ireland",
+    "IATA": "SNN",
+    "ICAO": "EINN",
+    "DST": "E",
+    "altitude": 46,
+    "TZ": "Europe/Dublin",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -8.924817,
+        52.701977
+      ]
+    },
+    "continent": 5,
+    "createdAt": "2022-11-27T18:29:52.663Z"
+  }
+]

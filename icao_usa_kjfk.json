@@ -1,0 +1,183 @@
+[
+  {
+    "_id": "6383ad12176bb14b83f331f7",
+    "name": "John F Kennedy Intl",
+    "city": "New York",
+    "country": "United States",
+    "IATA": "JFK",
+    "ICAO": "KJFK",
+    "DST": "A",
+    "altitude": 13,
+    "TZ": "America/New_York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.77892,
+        40.63975
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:31:46.567Z"
+  },
+  {
+    "_id": "6383ad606ba30f90d342ae2c",
+    "name": "Idlewild Intl",
+    "city": "New York",
+    "country": "United States",
+    "IATA": "IDL",
+    "ICAO": "KIDL",
+    "DST": "A",
+    "altitude": 13,
+    "TZ": "America/New_York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.77892,
+        40.63975
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:33:04.078Z"
+  },
+  {
+    "_id": "6383ad0cdc6f429e3bd97c36",
+    "name": "La Guardia",
+    "city": "New York",
+    "country": "United States",
+    "IATA": "LGA",
+    "ICAO": "KLGA",
+    "DST": "A",
+    "altitude": 22,
+    "TZ": "America/New_York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.872604,
+        40.777245
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:31:40.747Z"
+  },
+  {
+    "_id": "6383ad19a110d431f5b1eec5",
+    "name": "East 34th Street Heliport",
+    "city": "New York",
+    "country": "United States",
+    "IATA": "TSS",
+    "ICAO": "NONE",
+    "DST": "A",
+    "altitude": 10,
+    "TZ": "America/New_York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.97195,
+        40.7425
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:31:53.988Z"
+  },
+  {
+    "_id": "6383ad6a79da421727c2405f",
+    "name": "One Police Plaza Heliport",
+    "city": "New York",
+    "country": "United States",
+    "IATA": "",
+    "ICAO": "NK39",
+    "DST": "A",
+    "altitude": 244,
+    "TZ": "America/New_York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9996,
+        40.7126
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:33:14.513Z"
+  },
+  {
+    "_id": "6383ad1897ca791189bc9219",
+    "name": "Wall Street Heliport",
+    "city": "New York",
+    "country": "United States",
+    "IATA": "JRB",
+    "ICAO": "KJRB",
+    "DST": "A",
+    "altitude": 7,
+    "TZ": "America/New_York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -74.009026,
+        40.701214
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:31:52.760Z"
+  },
+  {
+    "_id": "6383ad5fa110d431f5b21098",
+    "name": "West 30th St. Heliport",
+    "city": "New York",
+    "country": "United States",
+    "IATA": "JRA",
+    "ICAO": "KJRA",
+    "DST": "A",
+    "altitude": 7,
+    "TZ": "America/New_York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -74.0071,
+        40.7545
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:33:03.841Z"
+  },
+
+  {
+    "_id": "6383ad841fb1de2a840b19e6",
+    "name": "Texas Gulf Coast Regional",
+    "city": "Angleton",
+    "country": "United States",
+    "IATA": "",
+    "ICAO": "KLBX",
+    "DST": "A",
+    "altitude": 25,
+    "TZ": "America/Chicago",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -95.46208,
+        29.108639
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:33:40.865Z"
+  },
+  {
+    "_id": "6383ad83176bb14b83f35dc7",
+    "name": "Andrau Airport",
+    "city": "Houston",
+    "country": "United States",
+    "IATA": "AAP",
+    "ICAO": "KAAP",
+    "DST": "A",
+    "altitude": 80,
+    "TZ": "America/Chicago",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -95.35,
+        29.43
+      ]
+    },
+    "continent": 2,
+    "createdAt": "2022-11-27T18:33:39.819Z"
+  }
+]
