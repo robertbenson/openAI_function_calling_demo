@@ -2,13 +2,15 @@
 
 ### Objective 
 
-"What are the airports (icao codes) within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles ?".
+"What are the airports (icao codes) within 20,000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set should be called ICAOS".
 
+#### Background
 An ICAO code is a zip code for an airport. It is a 4 digit alphanumeric that uniquely identifies an airport/airfield. e.g. EINN is the ICAO for Shannon Airport, Ireland. KJFK is the code for John F Kennedy.
 
-This request would not be a typical use case. It does however demonstrate the type of respondes that OpenAI can return.
+This request would not be a typical use case. It does however demonstrate the type of responses that OpenAI can return.
 
 # [Function Calling](https://cookbook.openai.com/examples/how_to_call_functions_with_chat_models) - with model generated arguments
+Function calling is a 4-step process:
 
 ## Step 1: send the conversation and available functions to the model
 OpenAI will identify the arguments required from the request
@@ -37,8 +39,8 @@ Function: get_icao
 `
 Params:{"location": "LAX", "radius": 20, "unit": "miles", "coordinates": "decimal"}
 `
-# Step 3: call the function
-# Step 4: send the info for each function call and function response to the model
+## Step 3: call the function
+## Step 4: send the info for each function call and function response to the model
 
 
     OpenAI will augment the data supplied by the user function call with OpenAI modifications
@@ -63,7 +65,7 @@ This python script will use model_version = `gpt-4o`
 
 OpenAI has different model offerings and price points. [models and price points](https://platform.openai.com/docs/models)
                                                                                  
-## Install packages to run the demo
+# Install packages to run the demo
 
 
 Manage environment variables, sensitive information. Hide the api key from public view for security
@@ -75,7 +77,7 @@ Install or upgrade the OpenAI Python package
 pip install --upgrade openai
 ```
 
-### Python Code 
+# Python Code 
 [sample OpenAI function calling example](https://cookbook.openai.com/examples/how_to_call_functions_with_chat_models)
 
 
@@ -84,7 +86,7 @@ The supplied openai code has been modified to:
 2. modify the content for my use case: `"What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles ?".`
 
 
-#### Python Code - build json for api call using model generated arguments 
+## Python Code - build json for api call using model generated arguments 
 ```python
 def get_icao(location, radius, unit, coordinates):
     """Build Json for call to api"""
@@ -105,7 +107,7 @@ def get_icao(location, radius, unit, coordinates):
 
 
 
-### Model Generated Arguments
+## Model Generated Arguments
 The parameters that are required for our use case are detailed with a type and description. A detailed and specific description is required in order to inform openai had to handle the response.
 For our custom api, we will require: location, radius, unit and coordinates. 
 1. Location 
@@ -132,7 +134,7 @@ Inform OpenAI that a model argument of either minutes or decimal is required, us
 coordinates: {"type": "string","description": "longitude and latitude", "enum": ["minutes", "decimal"]},
 ```
 
-#### Python Code - define the model generated arguments
+## Python Code - define the model generated arguments
 
 
 ```python
@@ -174,8 +176,8 @@ def run_conversation(user_content: str):
 ```
 
 
-## OpenAI Generated Output 
-### Response from the chat request:
+# OpenAI Generated Output 
+## Response from the chat request:
 
 ```JSON
 Request: What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set shoud be called ICAOS
@@ -321,9 +323,9 @@ JSON returned:
   ]
 }
 ```
-### JSON output specified
+## JSON output specified
 
-#### [JSON Mode](https://platform.openai.com/docs/guides/text-generation/json-mode)
+### [JSON Mode](https://platform.openai.com/docs/guides/text-generation/json-mode)
 set the response format
 ```Python
 second_response = client.chat.completions.create(
@@ -378,22 +380,30 @@ The radius is 20 , unit is kilometers (20,000 meters) and coordinates as minutes
 {"location": "LAX, CA", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
 ```
 These can be used in 3 separate api calls as required.
-## Key Take Away
+# Key Take Away
 
-### One Request
+## One Request
 
 One request was made to OpenAI
 
-### Iterative Response - 3 function requests
+## Iterative Response - 3 function requests
 
 OpenAI has extracted the model arguments from the request. It has identified that 3 airfields are required and supplied information to make 3 separate api calls or function requests. 
-### Conversion - context and inference
+## Conversion - context and inference
 
 The requested distance was 20,000 meters. However, OpenAI has noted that acceptable responses are miles or kilometers and has automatically converted the parameters, radius and units to 20 and kilometers respectively.
 
-### OpenAI Model has augmented the response
+### OpenAI Model has augmented and filtered the response
 
 The model has determined the model arguments from the user request, (first time to access the model). The data has been retrieved and added to the model.
 The model had been accessed for a second time to refine the answer.
 
-OpenAI did not accept at face value the data supplied by the user was correct. Airfield data was added that was outside the 20km range, but OpenAI correctly identified these airfields, in step 4, and did not report on them.
+#### Augmentation - inference and context
+
+The original request asked for a "TZ". At no point in this demo Python code or data has a "TZ" been mentioned or declared. 
+However, OpenAI has correctly identified a "TZ" in this context is a Time Zone, and it has returned the "TZ" for each airport.
+
+## Filter
+OpenAI did not accept at face value the data supplied by the user was correct.
+
+Airfield data was deliberately added to the JSON files, that was outside the 20km range, but OpenAI correctly identified these airfields, in step 4, and did not report on them.
