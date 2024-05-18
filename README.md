@@ -400,6 +400,7 @@ The model had been accessed for a second time to refine the answer.
 
 ### Augmentation - inference and context
 
+
 The original request asked for a "TZ". At no point in this demo Python code or data has a "TZ" been mentioned or declared. 
 However, OpenAI has correctly identified a "TZ" in this context is a Time Zone, and it has returned the "TZ" for each airport.
 
@@ -407,3 +408,8 @@ However, OpenAI has correctly identified a "TZ" in this context is a Time Zone, 
 OpenAI did not accept at face value the data supplied by the user in the 3 function calls was correct.
 
 Airfield data was deliberately added to the JSON files, that was outside the 20km range, but OpenAI correctly identified these airfields, in step 4, and did not report on them.
+
+Rows in red were 4 input fields, correctly removed by the model as they were outside the range of 20km. 
+The column in green "TZ" was added by the model.
+
+![data_augmentation.png](data_augmentation.png)
