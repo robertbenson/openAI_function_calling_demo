@@ -412,4 +412,11 @@ Airfield data was deliberately added to the JSON files, that was outside the 20k
 Rows in red were 4 input fields, correctly removed by the model as they were outside the range of 20km. 
 The column in green "TZ" was added by the model.
 
+# Data in the model (not complete) 
 ![data_augmentation.png](data_augmentation.png)
+
+# Output from the model after processing 
+
+note that the columns in green were derived by the model and delivered as per the request.
+
+![data_as_requested.png](data_as_requested.png)

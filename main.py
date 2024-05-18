@@ -143,6 +143,10 @@ def run_conversation(user_content: str, seed=None):
 def process_output(json_str: str):
     data = json.loads(json_str)
     print(type(data))  # dictionary
+    print("data:", data)
+
+    save_model_data(data)
+
     for icao in data['ICAOS']:
         print(icao)
 
@@ -163,6 +167,11 @@ def process_output(json_str: str):
     print("{:<30}{:>5}".format("Dublin entries returned:", ei_count))
     print("{:<30}{:>5}".format("Los Angeles entries returned:",
                                Los_Angeles_count))
+
+
+def save_model_data(data):
+    with open('data_from_openai.json', 'w') as f:
+        json.dump(data, f)
 
 
 if __name__ == '__main__':
