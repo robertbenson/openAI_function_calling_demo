@@ -2,9 +2,11 @@
 
 ### Objective 
 
-"What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles ?".
+"What are the airports (icao codes) within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles ?".
 
-_An ICAO is a 4 digit alphanumeric that uniquely identifies an airport/airfield. e.g. EINN is the ICAO for Shannon Airport, Ireland._
+An ICAO code is a zip code for an airport. It is a 4 digit alphanumeric that uniquely identifies an airport/airfield. e.g. EINN is the ICAO for Shannon Airport, Ireland. KJFK is the code for John F Kennedy.
+
+This request would not be a typical use case. It does however demonstrate the type of respondes that OpenAI can return.
 
 # [Function Calling](https://cookbook.openai.com/examples/how_to_call_functions_with_chat_models) - with model generated arguments
 
@@ -174,92 +176,152 @@ def run_conversation(user_content: str):
 
 ## OpenAI Generated Output 
 ### Response from the chat request:
+
+```JSON
+Request: What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set shoud be called ICAOS
+
+Model Function Call: get_icao
+Params:{"location": "John F Kennedy airport", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
+
+Model Function Call: get_icao
+Params:{"location": "Dublin", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
+
+Model Function Call: get_icao
+Params:{"location": "LAX", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
+
+JSON returned:  
+{
+  "ICAOS": [
+    {
+      "ICAO": "KJFK",
+      "name": "John F Kennedy Intl",
+      "city": "New York",
+      "lat": 40.63975,
+      "lon": -73.77892,
+      "distance_in_miles": 0,
+      "TZ": "America/New_York"
+    },
+    {
+      "ICAO": "KIDL",
+      "name": "Idlewild Intl",
+      "city": "New York",
+      "lat": 40.63975,
+      "lon": -73.77892,
+      "distance_in_miles": 0,
+      "TZ": "America/New_York"
+    },
+    {
+      "ICAO": "KLGA",
+      "name": "La Guardia",
+      "city": "New York",
+      "lat": 40.777245,
+      "lon": -73.872604,
+      "distance_in_miles": 10.5,
+      "TZ": "America/New_York"
+    },
+    {
+      "ICAO": "NONE",
+      "name": "East 34th Street Heliport",
+      "city": "New York",
+      "lat": 40.7425,
+      "lon": -73.97195,
+      "distance_in_miles": 12.5,
+      "TZ": "America/New_York"
+    },
+    {
+      "ICAO": "NK39",
+      "name": "One Police Plaza Heliport",
+      "city": "New York",
+      "lat": 40.7126,
+      "lon": -73.9996,
+      "distance_in_miles": 15.5,
+      "TZ": "America/New_York"
+    },
+    {
+      "ICAO": "KJRB",
+      "name": "Wall Street Heliport",
+      "city": "New York",
+      "lat": 40.701214,
+      "lon": -74.009026,
+      "distance_in_miles": 16.5,
+      "TZ": "America/New_York"
+    },
+    {
+      "ICAO": "KJRA",
+      "name": "West 30th St. Heliport",
+      "city": "New York",
+      "lat": 40.7545,
+      "lon": -74.0071,
+      "distance_in_miles": 15.5,
+      "TZ": "America/New_York"
+    },
+    {
+      "ICAO": "EIDW",
+      "name": "Dublin",
+      "city": "Dublin",
+      "lat": 53.421333,
+      "lon": -6.270075,
+      "distance_in_miles": 0,
+      "TZ": "Europe/Dublin"
+    },
+    {
+      "ICAO": "EIWT",
+      "name": "Weston Airport",
+      "city": "Leixlip",
+      "lat": 53.351334,
+      "lon": -6.4875,
+      "distance_in_miles": 12.5,
+      "TZ": "Europe/Dublin"
+    },
+    {
+      "ICAO": "EIME",
+      "name": "Casement",
+      "city": "Casement",
+      "lat": 53.301666,
+      "lon": -6.451333,
+      "distance_in_miles": 15.5,
+      "TZ": "Europe/Dublin"
+    },
+    {
+      "ICAO": "KLAX",
+      "name": "Los Angeles Intl",
+      "city": "Los Angeles",
+      "lat": 33.942535,
+      "lon": -118.40807,
+      "distance_in_miles": 0,
+      "TZ": "America/Los_Angeles"
+    },
+    {
+      "ICAO": "KHHR",
+      "name": "Jack Northrop Fld Hawthorne Muni",
+      "city": "Hawthorne",
+      "lat": 33.92284,
+      "lon": -118.33518,
+      "distance_in_miles": 4.5,
+      "TZ": "America/Los_Angeles"
+    },
+    {
+      "ICAO": "KSMO",
+      "name": "Santa Monica Municipal Airport",
+      "city": "Santa Monica",
+      "lat": 34.015835,
+      "lon": -118.45131,
+      "distance_in_miles": 8.5,
+      "TZ": "America/Los_Angeles"
+    },
+    {
+      "ICAO": "KTOA",
+      "name": "Zamperini Field Airport",
+      "city": "Torrance",
+      "lat": 33.80339,
+      "lon": -118.33961,
+      "distance_in_miles": 12.5,
+      "TZ": "America/Los_Angeles"
+    }
+  ]
+}
 ```
-Request: What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles ?
-
-Model Function Call: get_icao
-Params:{"location": "John F Kennedy Airport, NY", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
-
-Model Function Call: get_icao
-Params:{"location": "Dublin, Ireland", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
-
-Model Function Call: get_icao
-Params:{"location": "LAX, CA", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
-
-### Airports within 20,000 meters of John F. Kennedy Airport (JFK)
-1. **John F Kennedy Intl (KJFK)**
-   - Latitude: 40.63975
-   - Longitude: -73.77892
-   - Distance: 0 miles
-
-2. **Idlewild Intl (KIDL)**
-   - Latitude: 40.63975
-   - Longitude: -73.77892
-   - Distance: 0 miles
-
-3. **La Guardia (KLGA)**
-   - Latitude: 40.777245
-   - Longitude: -73.872604
-   - Distance: ~10 miles
-
-4. **East 34th Street Heliport (TSS)**
-   - Latitude: 40.7425
-   - Longitude: -73.97195
-   - Distance: ~12 miles
-
-5. **One Police Plaza Heliport (NK39)**
-   - Latitude: 40.7126
-   - Longitude: -73.9996
-   - Distance: ~13 miles
-
-6. **Wall Street Heliport (KJRB)**
-   - Latitude: 40.701214
-   - Longitude: -74.009026
-   - Distance: ~14 miles
-
-7. **West 30th St. Heliport (KJRA)**
-   - Latitude: 40.7545
-   - Longitude: -74.0071
-   - Distance: ~15 miles
-
-### Airports within 20,000 meters of Dublin Airport (EIDW)
-1. **Dublin (EIDW)**
-   - Latitude: 53.421333
-   - Longitude: -6.270075
-   - Distance: 0 miles
-
-2. **Weston Airport (EIWT)**
-   - Latitude: 53.351334
-   - Longitude: -6.4875
-   - Distance: ~10 miles
-
-3. **Casement (EIME)**
-   - Latitude: 53.301666
-   - Longitude: -6.451333
-   - Distance: ~13 miles
-
-### Airports within 20,000 meters of Los Angeles International Airport (LAX)
-1. **Los Angeles Intl (KLAX)**
-   - Latitude: 33.942535
-   - Longitude: -118.40807
-   - Distance: 0 miles
-
-2. **Jack Northrop Fld Hawthorne Muni (KHHR)**
-   - Latitude: 33.92284
-   - Longitude: -118.33518
-   - Distance: ~5 miles
-
-3. **Santa Monica Municipal Airport (KSMO)**
-   - Latitude: 34.015835
-   - Longitude: -118.45131
-   - Distance: ~9 miles
-
-4. **Zamperini Field Airport (KTOA)**
-   - Latitude: 33.80339
-   - Longitude: -118.33961
-   - Distance: ~14 miles
-```
-### JSON output
+### JSON output specified
 
 #### [JSON Mode](https://platform.openai.com/docs/guides/text-generation/json-mode)
 set the response format
@@ -275,132 +337,35 @@ second_response = client.chat.completions.create(
 
 
 
-`user_request = ("What are the icao codes within 20000 meters of John F "
-                "Kennedy airport, Dublin and LAX , return long and "
-                "lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles.")`
 
-```JSON
-JSON returned:  
 
-{
-  "results": [
-    {
-      "location": "John F Kennedy Airport, NY",
-      "icao_codes": [
-        {
-          "ICAO": "KJFK",
-          "name": "John F Kennedy Intl",
-          "city": "New York",
-          "lat": 40.63975,
-          "lon": -73.77892,
-          "distance_in_miles": 0
-        },
-        {
-          "ICAO": "KIDL",
-          "name": "Idlewild Intl",
-          "city": "New York",
-          "lat": 40.63975,
-          "lon": -73.77892,
-          "distance_in_miles": 0
-        },
-        {
-          "ICAO": "KLGA",
-          "name": "La Guardia",
-          "city": "New York",
-          "lat": 40.777245,
-          "lon": -73.872604,
-          "distance_in_miles": 8.91
-        },
-        {
-          "ICAO": "NK39",
-          "name": "One Police Plaza Heliport",
-          "city": "New York",
-          "lat": 40.7126,
-          "lon": -73.9996,
-          "distance_in_miles": 17.04
-        },
-        {
-          "ICAO": "KJRB",
-          "name": "Wall Street Heliport",
-          "city": "New York",
-          "lat": 40.701214,
-          "lon": -74.009026,
-          "distance_in_miles": 17.71
-        }
-      ]
-    },
-    {
-      "location": "Dublin",
-      "icao_codes": [
-        {
-          "ICAO": "EIDW",
-          "name": "Dublin",
-          "city": "Dublin",
-          "lat": 53.421333,
-          "lon": -6.270075,
-          "distance_in_miles": 0
-        },
-        {
-          "ICAO": "EIWT",
-          "name": "Weston Airport",
-          "city": "Leixlip",
-          "lat": 53.351334,
-          "lon": -6.4875,
-          "distance_in_miles": 13.19
-        },
-        {
-          "ICAO": "EIME",
-          "name": "Casement",
-          "city": "Casement",
-          "lat": 53.301666,
-          "lon": -6.451333,
-          "distance_in_miles": 15.5
-        }
-      ]
-    },
-    {
-      "location": "LAX",
-      "icao_codes": [
-        {
-          "ICAO": "KLAX",
-          "name": "Los Angeles Intl",
-          "city": "Los Angeles",
-          "lat": 33.942535,
-          "lon": -118.40807,
-          "distance_in_miles": 0
-        },
-        {
-          "ICAO": "KHHR",
-          "name": "Jack Northrop Fld Hawthorne Muni",
-          "city": "Hawthorne",
-          "lat": 33.92284,
-          "lon": -118.33518,
-          "distance_in_miles": 4.68
-        },
-        {
-          "ICAO": "KSMO",
-          "name": "Santa Monica Municipal Airport",
-          "city": "Santa Monica",
-          "lat": 34.015835,
-          "lon": -118.45131,
-          "distance_in_miles": 7.23
-        },
-        {
-          "ICAO": "KTOA",
-          "name": "Zamperini Field Airport",
-          "city": "Torrance",
-          "lat": 33.80339,
-          "lon": -118.33961,
-          "distance_in_miles": 13.64
-        }
-      ]
-    }
-  ]
-}
+Process JSON data example output:
 ```
-### Custom JSON using supplied model arguments
+<class 'dict'>
+{'ICAO': 'KJFK', 'name': 'John F Kennedy Intl', 'city': 'New York', 'lat': 40.63975, 'lon': -73.77892, 'distance_in_miles': 0, 'TZ': 'America/New_York'}
+{'ICAO': 'KIDL', 'name': 'Idlewild Intl', 'city': 'New York', 'lat': 40.63975, 'lon': -73.77892, 'distance_in_miles': 0, 'TZ': 'America/New_York'}
+{'ICAO': 'KLGA', 'name': 'La Guardia', 'city': 'New York', 'lat': 40.777245, 'lon': -73.872604, 'distance_in_miles': 10.5, 'TZ': 'America/New_York'}
+{'ICAO': 'NONE', 'name': 'East 34th Street Heliport', 'city': 'New York', 'lat': 40.7425, 'lon': -73.97195, 'distance_in_miles': 12.5, 'TZ': 'America/New_York'}
+{'ICAO': 'NK39', 'name': 'One Police Plaza Heliport', 'city': 'New York', 'lat': 40.7126, 'lon': -73.9996, 'distance_in_miles': 15.5, 'TZ': 'America/New_York'}
+{'ICAO': 'KJRB', 'name': 'Wall Street Heliport', 'city': 'New York', 'lat': 40.701214, 'lon': -74.009026, 'distance_in_miles': 16.5, 'TZ': 'America/New_York'}
+{'ICAO': 'KJRA', 'name': 'West 30th St. Heliport', 'city': 'New York', 'lat': 40.7545, 'lon': -74.0071, 'distance_in_miles': 15.5, 'TZ': 'America/New_York'}
+{'ICAO': 'EIDW', 'name': 'Dublin', 'city': 'Dublin', 'lat': 53.421333, 'lon': -6.270075, 'distance_in_miles': 0, 'TZ': 'Europe/Dublin'}
+{'ICAO': 'EIWT', 'name': 'Weston Airport', 'city': 'Leixlip', 'lat': 53.351334, 'lon': -6.4875, 'distance_in_miles': 12.5, 'TZ': 'Europe/Dublin'}
+{'ICAO': 'EIME', 'name': 'Casement', 'city': 'Casement', 'lat': 53.301666, 'lon': -6.451333, 'distance_in_miles': 15.5, 'TZ': 'Europe/Dublin'}
+{'ICAO': 'KLAX', 'name': 'Los Angeles Intl', 'city': 'Los Angeles', 'lat': 33.942535, 'lon': -118.40807, 'distance_in_miles': 0, 'TZ': 'America/Los_Angeles'}
+{'ICAO': 'KHHR', 'name': 'Jack Northrop Fld Hawthorne Muni', 'city': 'Hawthorne', 'lat': 33.92284, 'lon': -118.33518, 'distance_in_miles': 4.5, 'TZ': 'America/Los_Angeles'}
+{'ICAO': 'KSMO', 'name': 'Santa Monica Municipal Airport', 'city': 'Santa Monica', 'lat': 34.015835, 'lon': -118.45131, 'distance_in_miles': 8.5, 'TZ': 'America/Los_Angeles'}
+{'ICAO': 'KTOA', 'name': 'Zamperini Field Airport', 'city': 'Torrance', 'lat': 33.80339, 'lon': -118.33961, 'distance_in_miles': 12.5, 'TZ': 'America/Los_Angeles'}
 
-3 JSON builds were generated using model arguments
+The count of all ICAO's is:      14
+New York entries returned:        7
+Dublin entries returned:          3
+Los Angeles entries returned:     4
+```
+
+### Function Calls supplied model arguments
+
+3 JSON builds were generated using the model arguments.
 
 The model has identified arguments from the request:
 The 3 locations are populated with the airfield names.
@@ -417,12 +382,11 @@ These can be used in 3 separate api calls as required.
 
 ### One Request
 
-"What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles ?".
-### Iterative - 3 responses
+One request was made to OpenAI
 
+### Iterative Response - 3 function requests
 
-
-OpenAI has extracted the model arguments from the request. It has identified that 3 airfields are required and supplied information to make 3 separate api calls. 
+OpenAI has extracted the model arguments from the request. It has identified that 3 airfields are required and supplied information to make 3 separate api calls or function requests. 
 ### Conversion - context and inference
 
 The requested distance was 20,000 meters. However, OpenAI has noted that acceptable responses are miles or kilometers and has automatically converted the parameters, radius and units to 20 and kilometers respectively.

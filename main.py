@@ -5,9 +5,9 @@ from openai import OpenAI
 import json
 
 
-user_request = ("What are the icao codes within 20000 meters of John F "
+user_request = ("What are the airports (icao codes) within 20000 meters of John F "
                 "Kennedy airport, Dublin and LAX , return long and "
-                "lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles. The set shoud be called ICAOS")
+                "lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set shoud be called ICAOS")
 
 load_dotenv()
 my_api_key = os.getenv("OPENAI_API_KEY")
@@ -51,7 +51,7 @@ def get_icao(location, radius, unit, coordinates):
     return json_string
 
 
-def run_conversation(user_content: str):
+def run_conversation(user_content: str, SEED=None):
     # Step 1: send the conversation and available functions to the model
     messages = [{"role": "user",
                  "content": user_content}]
@@ -129,13 +129,15 @@ def run_conversation(user_content: str):
             model=model_version,
             messages=messages,
             response_format={"type": "json_object"},
+            seed=SEED,
+            temperature=0,
             # stream=True
         )  # get a new response from the model where it can see the function
         return second_response
 
 if __name__ == '__main__':
     print(f"\nRequest: {user_request}")
-    response = run_conversation(user_request)
+    response = run_conversation(user_request, 123)
     print("")
 
     # The following code gives a scrolling effect. Data is being returned as it
@@ -153,11 +155,24 @@ if __name__ == '__main__':
     for icao in data['ICAOS']:
         print(icao)
 
+    col1_width = 20
+    count = len(data["ICAOS"])
+    # Print the total count of all ICAO's returned
+
+
     new_york_count = sum(1 for entry in data["ICAOS"] if entry["city"] == "New York")
-    print("\n# New York entries returned: ", new_york_count)
+
 
     # Count the entries where first 2 characters of ICAO are "EI"
     ei_count = sum(
         1 for entry in data["ICAOS"] if entry["ICAO"].startswith("EI"))
-    print("\n# Dublin entries returned: ", ei_count)
+
+    Los_Angeles_count = sum(1 for entry in data["ICAOS"] if entry["TZ"].endswith("Los_Angeles"))
+
+    print("")
+    print("{:<30}{:>5}".format("The count of all ICAO\'s is:", count))
+    print("{:<30}{:>5}".format("New York entries returned:", new_york_count))
+    print("{:<30}{:>5}".format("Dublin entries returned:", ei_count))
+    print("{:<30}{:>5}".format("Los Angeles entries returned:", Los_Angeles_count))
+
 
