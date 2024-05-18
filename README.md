@@ -5,7 +5,7 @@
 "What are the airports (icao codes) within 20,000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set should be called ICAOS".
 
 #### Background
-An ICAO code is a zip code for an airport. It is a 4 digit alphanumeric that uniquely identifies an airport/airfield. e.g. EINN is the ICAO for Shannon Airport, Ireland. KJFK is the code for John F Kennedy.
+An ICAO code is like a zip code for an airport. It is a 4 digit alphanumeric that uniquely identifies an airport/airfield. e.g. EINN is the ICAO for Shannon Airport, Ireland. KJFK is the code for John F Kennedy.
 
 This request would not be a typical use case. It does however demonstrate the type of responses that OpenAI can return.
 
@@ -110,6 +110,9 @@ def get_icao(location, radius, unit, coordinates):
 ## Model Generated Arguments
 The parameters that are required for our use case are detailed with a type and description. A detailed and specific description is required in order to inform openai had to handle the response.
 For our custom api, we will require: location, radius, unit and coordinates. 
+
+### Definitions:
+
 1. Location 
 ```
 location: {"type": "string","description": "The city and state, e.g. San Francisco, CA",},
@@ -133,6 +136,11 @@ Inform OpenAI that a model argument of either minutes or decimal is required, us
 ```
 coordinates: {"type": "string","description": "longitude and latitude", "enum": ["minutes", "decimal"]},
 ```
+
+Using these definitions, the model arguments can be determined from the request.
+
+
+![model_arguments.png](model_arguments.png)
 
 ## Python Code - define the model generated arguments
 
