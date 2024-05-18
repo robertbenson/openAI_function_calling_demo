@@ -179,22 +179,20 @@ def run_conversation(user_content: str):
 # OpenAI Generated Output 
 ## Response from the chat request:
 
-
-Request: What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set shoud be called ICAOS
+```
+Request: What are the airports (icao codes) within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set shoud be called ICAOS
 
 Model Function Call: get_icao
-
 Params:{"location": "John F Kennedy airport", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
 
 Model Function Call: get_icao
-
 Params:{"location": "Dublin", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
 
 Model Function Call: get_icao
-
 Params:{"location": "LAX", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
 
-JSON returned:  
+JSON returned:
+```  
 ```JSON
 {
   "ICAOS": [
@@ -335,7 +333,7 @@ set the response format
 second_response = client.chat.completions.create(
             model=model_version,
             messages=messages,
-            response_format={"type": "json_object"},       <<<<<<<<<<<<<<<<<<<<<<<<<<
+            response_format={"type": "json_object"},       #<<<<<<<<<<<<<<<< JSON
             # stream=True
         ) 
          
@@ -393,21 +391,19 @@ One request was made to OpenAI
 ## Iterative Response - 3 function requests
 
 OpenAI has extracted the model arguments from the request. It has identified that 3 airfields are required and supplied information to make 3 separate api calls or function requests. 
-## Conversion - context and inference
 
+## Model has augmented and filtered the response
 The requested distance was 20,000 meters. However, OpenAI has noted that acceptable responses are miles or kilometers and has automatically converted the parameters, radius and units to 20 and kilometers respectively.
-
-### OpenAI Model has augmented and filtered the response
 
 The model has determined the model arguments from the user request, (first time to access the model). The data has been retrieved and added to the model.
 The model had been accessed for a second time to refine the answer.
 
-#### Augmentation - inference and context
+### Augmentation - inference and context
 
 The original request asked for a "TZ". At no point in this demo Python code or data has a "TZ" been mentioned or declared. 
 However, OpenAI has correctly identified a "TZ" in this context is a Time Zone, and it has returned the "TZ" for each airport.
 
 ## Filter
-OpenAI did not accept at face value the data supplied by the user was correct.
+OpenAI did not accept at face value the data supplied by the user in the 3 function calls was correct.
 
 Airfield data was deliberately added to the JSON files, that was outside the 20km range, but OpenAI correctly identified these airfields, in step 4, and did not report on them.
