@@ -325,7 +325,7 @@ JSON returned:
   ]
 }
 ```
-## JSON output specified
+## JSON output specified for the model
 
 ### [JSON Mode](https://platform.openai.com/docs/guides/text-generation/json-mode)
 set the response format

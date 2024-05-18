@@ -4,10 +4,12 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import json
 
-
-user_request = ("What are the airports (icao codes) within 20000 meters of John F "
-                "Kennedy airport, Dublin and LAX , return long and "
-                "lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set shoud be called ICAOS")
+user_request = (
+    "What are the airports (icao codes) within 20000 meters of John F "
+    "Kennedy airport, Dublin and LAX , return long and "
+    "lat in degrees for each and approximate distance in miles. All output "
+    "is to be in json. The json fields to include are ICAO, name, city, lat, "
+    "lon, distance_in_miles and TZ. The set should be called ICAOS")
 
 load_dotenv()
 my_api_key = os.getenv("OPENAI_API_KEY")
@@ -16,12 +18,11 @@ model_version = "gpt-4o"
 client = OpenAI()
 
 
-
 def read_json(file_name: str):
     with open(file_name, 'r') as json_file:
-        data = json.load(json_file)
-        json_string = json.dumps(data)
-        return json_string
+        data1 = json.load(json_file)
+        json_file_string: str = json.dumps(data1)
+        return json_file_string
 
 
 def get_icao(location, radius, unit, coordinates):
@@ -40,18 +41,18 @@ def get_icao(location, radius, unit, coordinates):
     # The api call would be here using a json string
     # The call has been replaced by 3 file reads.
 
-    if ("John F Kennedy" in location):
-        json_string = read_json('icao_usa_kjfk.json')
-    elif ("LAX" in location):
-        json_string = read_json('icao_usa_klax.json')
-    elif ("Dublin" in location):
-        json_string = read_json('icao_irl_eidw.json')
+    if "John F Kennedy" in location:
+        json_str = read_json('icao_usa_kjfk.json')
+    elif "LAX" in location:
+        json_str = read_json('icao_usa_klax.json')
+    elif "Dublin" in location:
+        json_str = read_json('icao_irl_eidw.json')
     else:
-        json_string = json.dumps(icao_info)
-    return json_string
+        json_str = json.dumps(icao_info)
+    return json_str
 
 
-def run_conversation(user_content: str, SEED=None):
+def run_conversation(user_content: str, seed=None):
     # Step 1: send the conversation and available functions to the model
     messages = [{"role": "user",
                  "content": user_content}]
@@ -66,11 +67,13 @@ def run_conversation(user_content: str, SEED=None):
                     "properties": {
                         "location": {
                             "type": "string",
-                            "description": "The city and state, e.g. San Francisco, CA",
+                            "description": "The city and state, e.g. San "
+                                           "Francisco, CA",
                         },
                         "radius": {
                             "type": "integer",
-                            "description": "distance from location in kilometers or miles",
+                            "description": "distance from location in "
+                                           "kilometers or miles",
                         },
                         "unit": {"type": "string",
                                  "description": "kilometers or miles",
@@ -91,7 +94,7 @@ def run_conversation(user_content: str, SEED=None):
         tool_choice="auto",
     )
     response_message = response.choices[0].message
-    tool_calls = response.choices[0].message.tool_calls
+    # tool_calls = response.choices[0].message.tool_calls
 
     tool_calls = response_message.tool_calls
     # Step 2: check if the model wanted to call a function
@@ -103,7 +106,8 @@ def run_conversation(user_content: str, SEED=None):
 
         messages.append(
             response_message)  # extend conversation with assistant's reply
-        # Step 4: send the info for each function call and function response to the model
+        # Step 4: send the info for each function call and function response
+        # to the model
         for tool_call in tool_calls:
             print(f"\nModel Function Call: {tool_call.function.name}")
             print(f"Params:{tool_call.function.arguments}")
@@ -129,11 +133,37 @@ def run_conversation(user_content: str, SEED=None):
             model=model_version,
             messages=messages,
             response_format={"type": "json_object"},
-            seed=SEED,
+            seed=seed,
             temperature=0,
             # stream=True
         )  # get a new response from the model where it can see the function
         return second_response
+
+
+def process_output(json_str: str):
+    data = json.loads(json_str)
+    print(type(data))  # dictionary
+    for icao in data['ICAOS']:
+        print(icao)
+
+    count = len(data["ICAOS"])
+    new_york_count = sum(
+        1 for entry in data["ICAOS"] if entry["city"] == "New York")
+
+    # Count the entries where first 2 characters of ICAO are "EI"
+    ei_count = sum(
+        1 for entry in data["ICAOS"] if entry["ICAO"].startswith("EI"))
+
+    Los_Angeles_count = sum(
+        1 for entry in data["ICAOS"] if entry["TZ"].endswith("Los_Angeles"))
+
+    print("")
+    print("{:<30}{:>5}".format("The count of all ICAO\'s is:", count))
+    print("{:<30}{:>5}".format("New York entries returned:", new_york_count))
+    print("{:<30}{:>5}".format("Dublin entries returned:", ei_count))
+    print("{:<30}{:>5}".format("Los Angeles entries returned:",
+                               Los_Angeles_count))
+
 
 if __name__ == '__main__':
     print(f"\nRequest: {user_request}")
@@ -148,31 +178,6 @@ if __name__ == '__main__':
     #     print(chunk.choices[0].delta.content or "", end='', flush=True)
 
     json_string = response.choices[0].message.content
-    print("JSON returned: ",json_string)
+    print("JSON returned: ", json_string)
 
-    data = json.loads(json_string)
-    print(type(data))      # dictionary
-    for icao in data['ICAOS']:
-        print(icao)
-
-    col1_width = 20
-    count = len(data["ICAOS"])
-    # Print the total count of all ICAO's returned
-
-
-    new_york_count = sum(1 for entry in data["ICAOS"] if entry["city"] == "New York")
-
-
-    # Count the entries where first 2 characters of ICAO are "EI"
-    ei_count = sum(
-        1 for entry in data["ICAOS"] if entry["ICAO"].startswith("EI"))
-
-    Los_Angeles_count = sum(1 for entry in data["ICAOS"] if entry["TZ"].endswith("Los_Angeles"))
-
-    print("")
-    print("{:<30}{:>5}".format("The count of all ICAO\'s is:", count))
-    print("{:<30}{:>5}".format("New York entries returned:", new_york_count))
-    print("{:<30}{:>5}".format("Dublin entries returned:", ei_count))
-    print("{:<30}{:>5}".format("Los Angeles entries returned:", Los_Angeles_count))
-
-
+    process_output(json_string)
