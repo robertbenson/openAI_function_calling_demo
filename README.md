@@ -179,19 +179,23 @@ def run_conversation(user_content: str):
 # OpenAI Generated Output 
 ## Response from the chat request:
 
-```JSON
+
 Request: What are the icao codes within 20000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set shoud be called ICAOS
 
 Model Function Call: get_icao
+
 Params:{"location": "John F Kennedy airport", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
 
 Model Function Call: get_icao
+
 Params:{"location": "Dublin", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
 
 Model Function Call: get_icao
+
 Params:{"location": "LAX", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
 
 JSON returned:  
+```JSON
 {
   "ICAOS": [
     {
