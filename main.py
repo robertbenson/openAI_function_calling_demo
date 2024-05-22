@@ -4,11 +4,18 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import json
 
+# user_request = (
+#     "What are the airports (icao codes) within 20000 meters of John F "
+#     "Kennedy airport, Dublin and LAX , return long and "
+#     "lat in degrees for each and approximate distance in miles. All output "
+#     "is to be in json. The json fields to include are ICAO, name, city, lat, "
+#     "lon, distance_in_miles and TZ. The set should be called ICAOS")
+
 user_request = (
     "What are the airports (icao codes) within 20000 meters of John F "
     "Kennedy airport, Dublin and LAX , return long and "
-    "lat in degrees for each and approximate distance in miles. All output "
-    "is to be in json. The json fields to include are ICAO, name, city, lat, "
+    "lat in degrees for each and approximate distance in miles."
+    "The json fields to include are ICAO, name, city, lat, "
     "lon, distance_in_miles and TZ. The set should be called ICAOS")
 
 load_dotenv()

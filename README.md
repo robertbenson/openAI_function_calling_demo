@@ -1,7 +1,34 @@
 # OpenAI - Function Calling Demo - using Python
 
-### Objective 
+## Bridging The Gap
+### Build Time to Current Time
+The LLM model is created or built at a particular time. 
 
+The model can only report on information that it knows at that specific time.
+
+
+
+For example, let's say the LLM was built last month. In the meantime, a car manufacturer has just released a new car and has published details of the car.
+The LLM will not be aware of the new model and will be unable to report appropriately. 
+
+
+
+<img src="LLM_response_prior_to_function_calling.png" alt="LLM response prior to function calling" width="500" >
+
+
+
+### with Function Calling
+
+_Function Calling_ allows the user to add their data (recent data) to the model to allow for refined answers from the model. 
+
+The example code given by OpenAI, is to get the weather in 3 locations. The LLM can't possibly know what the weather is, that's real time information, but it can use "Function Calling" to get the weather from an api to give a "near to real time" response.
+
+
+
+<img src="LLM_response_with_Function_Calling.png" alt="LLM response prior to function calling" width="500" >
+
+
+### Objective
 "What are the airports (icao codes) within 20,000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set should be called ICAOS".
 
 #### Background
@@ -10,12 +37,15 @@ An ICAO code is like a zip code for an airport. It is a 4 digit alphanumeric tha
 This request would not be a typical use case. It does however demonstrate the type of responses that OpenAI can return.
 
 # [Function Calling](https://cookbook.openai.com/examples/how_to_call_functions_with_chat_models) - with model generated arguments
+
+Function calling gets more reliably structured data back from the model.
+
 Function calling is a 4-step process:
 
 ## Step 1: send the conversation and available functions to the model
 OpenAI will identify the arguments required from the request
 ## Step 2 :check if the model wanted to call a function
-For this demo, the model did want to call a function, 3 times, once for each location.
+For this demo, the model called a function, 3 times, once for each location.
 Note how the model was able to determine the model arguments from the request.
 
 ### 1st time function call:
@@ -183,6 +213,12 @@ def run_conversation(user_content: str):
 
 ```
 
+The model can extract arguments from the prompt to build JSON to use in api calls: 
+```JSON 
+{"location": "John F Kennedy Airport, NY", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
+{"location": "Dublin, Ireland", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
+{"location": "LAX, CA", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
+```
 
 # OpenAI Generated Output 
 ## Response from the chat request:
@@ -384,11 +420,6 @@ The 3 locations are populated with the airfield names.
 
 The radius is 20 , unit is kilometers (20,000 meters) and coordinates as minutes.
 
-```JSON 
-{"location": "John F Kennedy Airport, NY", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
-{"location": "Dublin, Ireland", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
-{"location": "LAX, CA", "radius": 20, "unit": "kilometers", "coordinates": "decimal"}
-```
 These can be used in 3 separate api calls as required.
 # Key Take Away
 
@@ -403,7 +434,7 @@ OpenAI has extracted the model arguments from the request. It has identified tha
 ## Model has augmented and filtered the response
 The requested distance was 20,000 meters. However, OpenAI has noted that acceptable responses are miles or kilometers and has automatically converted the parameters, radius and units to 20 and kilometers respectively.
 
-The model has determined the model arguments from the user request, (first time to access the model). The data has been retrieved and added to the model.
+The model has determined the model arguments from the user request or prompt, (first time to access the model). The data has been retrieved and added to the model.
 The model had been accessed for a second time to refine the answer.
 
 ### Augmentation - inference and context
