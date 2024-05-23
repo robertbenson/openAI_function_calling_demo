@@ -19,7 +19,10 @@ The LLM will not be aware of the new model and will be unable to report appropri
 
 ### with Function Calling
 
-_Function Calling_ allows the user to add their data (recent data) to the model to allow for refined answers from the model. 
+<img src="LLM_Function_Calling_Augment_Response.png" alt="LLM response prior to function calling" width="500" >
+
+
+_Function Calling_ allows the user to add their data (recent data) to the model to allow for more refined answers from the model. 
 
 Details of the car can be added to the model to give an augmented answer.
 
@@ -27,7 +30,7 @@ The example code given by OpenAI, is to get the weather in 3 locations. The LLM 
 
 <img src="LLM_response_with_Function_Calling.png" alt="LLM response prior to function calling" width="500" >
 
-### Objective
+### Objective for this function calling example
 "What are the airports (icao codes) within 20,000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set should be called ICAOS".
 
 #### Background
