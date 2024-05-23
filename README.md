@@ -28,7 +28,6 @@ Details of the car can be added to the model to give an augmented answer.
 
 The example code given by OpenAI, is to get the weather in 3 locations. The LLM can't possibly know what the weather is, that's real time information, but it can use "Function Calling" to get the weather from an api to give a "near to real time" response.
 
-<img src="LLM_response_with_Function_Calling.png" alt="LLM response with function calling" width="500" >
 
 ### Objective for this function calling example
 "What are the airports (icao codes) within 20,000 meters of John F Kennedy airport, Dublin and LAX , return long and lat in degrees for each and approximate distance in miles. All output is to be in json. The json fields to include are ICAO, name, city, lat, lon, distance_in_miles and TZ. The set should be called ICAOS".
